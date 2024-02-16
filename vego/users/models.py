@@ -21,9 +21,9 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
     
-#* from django.contrib.auth.models import AbstractUser
+#* from django.contrib.auth.models import AbstrUser
 
-#* class CustomUser(AbstractUser): 
+# * class CustomUser(AbstractUser): 
 # # Extender el modelo de usuario de Django, no sobreescribirlo
 #     # Agregar campos personalizados si es necesario
 #     bio = models.TextField(blank=True)

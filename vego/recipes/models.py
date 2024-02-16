@@ -19,3 +19,5 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+    
+# Arania web scrapy para obtener recetas, 

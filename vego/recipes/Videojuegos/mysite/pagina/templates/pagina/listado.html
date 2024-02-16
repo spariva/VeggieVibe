@@ -1,0 +1,11 @@
+{% extends 'pagina/base.html' %}
+
+{% block contenido %}
+    <h1>Listado de Juegos</h1>
+    <ul>
+        {% for object in object_list %}
+            <li>{{ object}}</li>
+        {% endfor %}
+    </ul>
+{% endblock contenido %}
+```

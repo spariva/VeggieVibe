@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if juegos %}
+    <h2>Juegos de {{ genero }}</h2>
+    <ul>
+    {% for juego in juegos %}
+        <li>
+            <strong> {{ juego.juego_text }}</strong><br>
+            Fecha de lanzamiento: {{ juego.pub_date }}<br>
+            Valoración: {{ juego.valoracion }} / 5<br><br>
+            Votado como favorito {{ juego.votos }} veces<br><br>
+            <form action="{% url 'votar' juego.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Votar">
+            </form><br>
+            --------------<a href="{% url 'descripcion' juego.id %}">Ver descripción</a>--------------
+        </li><br><br>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No se encuentran los juegos</p>
+{% endif %}
+
+{% endblock %}
