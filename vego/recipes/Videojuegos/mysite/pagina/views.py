@@ -9,8 +9,8 @@ from django.views import View
 
 # Create your views here.
 class JuegosView(LoginRequiredMixin, View):
-    login_url = '/accounts/login/'
-    redirect_field_name = 'next'
+    login_url = '/accounts/login/' #para que redirija a la pagina de login si no estamos logeados
+    redirect_field_name = 'next' #para que redirija a la pagina en la que estabamos despues de logearnos, pone next porque es el nombre que se le da por defecto
 
     def get(self, request, genero_id):
         genero = Genero.objects.get(id=genero_id)
