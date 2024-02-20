@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions', #nose
+    'allauth', #añadimos estas 3 para el login
+    'allauth.account',
+    'allauth.socialaccount',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware', #login
 ]
 
 ROOT_URLCONF = 'vego.urls'
@@ -69,6 +74,13 @@ TEMPLATES = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [ #lo añadimos entero para el login
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 WSGI_APPLICATION = 'vego.wsgi.application'
 
 
@@ -81,6 +93,17 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.mysql",
+#         "NAME": "BDgames",
+#         "USER": "games",
+#         "PASSWORD": "12345678",
+#         "HOST": "127.0.0.1",
+#         "PORT": "3306",#5432 el que tenia antes
+#     }
+# }
 
 
 # Password validation
@@ -123,3 +146,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = '/recipes' #añadido para el login
+LOGOUT_REDIRECT_URL = '/recipes' #añadido para el logout
