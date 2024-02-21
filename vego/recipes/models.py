@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from users.models import User
+# from users.models import User
 
 class Recipe(models.Model):
     title = models.CharField(max_length=100)

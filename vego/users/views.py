@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import DetailView
 from .models import User, Profile, Favourite
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class ProfileView(LoginRequiredMixin, DetailView):
     login_url = '/accounts/login/' #para que redirija a la pagina de login si no estamos logeados
@@ -15,13 +16,13 @@ class ProfileView(LoginRequiredMixin, DetailView):
         context['profile'] = user.profile 
         return context
     
-class IndexView(DetailView):
-    model = User
-    template_name = 'users/index.html'
-    context_object_name = 'user'
+# class IndexView(DetailView):
+#     model = User
+#     template_name = 'users/index.html'
+#     context_object_name = 'user'
     
-    def get_object(self):
-        return self.request.user
+#     def get_object(self):
+#         return self.request.user
 
 # Compare this snippet from vego/users/urls.py:
 # from django.urls import path
