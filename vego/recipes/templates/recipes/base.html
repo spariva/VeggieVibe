@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VeggieVibe</title>
+    {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"> {% endcomment %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta author = "Maki Spariva">
+    <meta description = "VeggieVibe es una aplicación web que te ayuda a encontrar recetas vegetarianas y veganas">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">Inicio</a></li>
+                {% comment %} <li><a href="{% url 'recetas' %}">Recetas</a></li>
+                <li><a href="{% url 'contacto' %}">Contacto</a></li> {% endcomment %}
+            </ul>
+        </nav>
+    {% block content %}{% endblock %}
+</body>
+</html>

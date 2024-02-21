@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Bienvenidx a la mejor web de Videojuegos</h1>
 <br>
-<p><a href="/pagina/generos">Ir a la página de Generos</a></p>
+<p><a href="{% url 'generos' %}">Ir a la página de Generos</a></p>
 <p>Aqui tienes el lsitado de juegos disponibles:</p>
 {% if juegos %}
 <ul>

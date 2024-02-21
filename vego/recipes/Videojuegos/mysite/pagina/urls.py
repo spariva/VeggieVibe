@@ -1,9 +1,9 @@
-from django.urls import path, include
-from . import views
-from pagina.views import JuegosView
 from django.conf.urls.static import static
 from django.contrib.auth.views import LogoutView
+from django.urls import include, path
+from pagina.views import JuegosView
 
+from . import views
 
 urlpatterns = [
     #ex: /pagina/
