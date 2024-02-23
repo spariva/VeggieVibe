@@ -10,7 +10,6 @@ def index(request):
 
 class RecipeListView(generic.ListView):
     model = Recipe
-    template_name = 'recipes/recipe_list.html'
 
 class RecipeDetailView(generic.DetailView):
     model = Recipe

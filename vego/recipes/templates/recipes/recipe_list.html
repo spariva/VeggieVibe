@@ -4,13 +4,13 @@
 <h1>Home</h1>
 <p>Welcome to the home page!</p>
 <ul>
-    {% for recipe in recipes %}
+    {% for recipe in object_list %}
         <li>
             <a href="{% url 'recipe_detail' recipe.id %}">{{ recipe.title }}</a>
         </li>
     {% endfor %}
 </ul>
-{% if recipe_list %}
+{% if object_list %}
     <ul>
         {% for recipe in recipes %}
             <li>
