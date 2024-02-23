@@ -2,8 +2,10 @@ from django.urls import path, include
 from . import views
 from django.conf.urls.static import static
 
+
 app_name = "recipes"
 urlpatterns = [
-    path('recipes/', views.index, name = 'index'),
-    # path("<int:pk>/", views.DetailView.as_view(), name="detail"),
+    path('', views.index, name='index'),
+    path("recipes", views.RecipeListView.as_view(), name="recipes"),
+    path("recipes/<int:pk>", views.RecipeDetailView.as_view(), name="recipe_detail"),
 ]
