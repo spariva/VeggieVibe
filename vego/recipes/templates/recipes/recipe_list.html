@@ -3,19 +3,16 @@
 {% block content %}
 <h1>Home</h1>
 <p>Welcome to the home page!</p>
-<ul>
-    {% for recipe in object_list %}
-        <li>
-            <a href="{% url 'recipe_detail' recipe.id %}">{{ recipe.title }}</a>
-        </li>
-    {% endfor %}
-</ul>
+<form method="get">
+    <input type="text" name="search" value="{{ request.GET.search }}">
+    <input type="submit" value="Search">
+</form>
 {% if object_list %}
     <ul>
         {% for recipe in recipes %}
-            <li>
-                <a href="{% url 'recipe_detail' recipe.id %}">{{ recipe.title }}</a>
-            </li>
+        <li>
+            <a href="{% url 'recipes:recipe_detail' recipe.id %}">{{ recipe.title }}</a>
+        </li>
         {% endfor %}
     </ul>
 {% else %}
