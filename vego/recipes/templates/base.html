@@ -13,11 +13,9 @@
     <header>
         <nav>
             <ul>
+                <li><a href="{% url 'recipes:recipe_list' %}" class="btn btn-success">Home</a></li>
                 <li>Login</li>
-                <li style="red">Tags</li>
-                {% comment %} <li><a href="{% url 'index' %}">Inicio</a></li> {% endcomment %}
-                {% comment %} <li><a href="{% url 'recetas' %}">Recetas</a></li>
-                <li><a href="{% url 'contacto' %}">Contacto</a></li> {% endcomment %}
+                <li style="blue">Categories</li>
             </ul>
         </nav>
     {% block content %}{% endblock %}

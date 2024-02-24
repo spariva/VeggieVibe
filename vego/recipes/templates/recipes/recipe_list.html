@@ -1,22 +1,23 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <h1>Home</h1>
 <p>Welcome to the home page!</p>
 <form method="get">
-    <input type="text" name="search" value="{{ request.GET.search }}">
-    <input type="submit" value="Search">
+  <input type="text" name="title" value="{{ request.GET.title }}" />
+  <input type="submit" value="Search recipe" />
+  <!-- For each tag I want to show an input of a checkbox with the name "tag"-->
+    {% for tag in tags %}
+    <input type="checkbox" name="tag" value="{{ tag.name }}" {% if tag.id in request.GET.tag %}checked{% endif %} /> {{ tag.name }}
+    {% endfor %}
+  {% comment %} <input type="checkbox" name="is_vegetarian" {% if request.GET.is_vegetarian %}checked{% endif %} /> {% endcomment %}
 </form>
 {% if object_list %}
-    <ul>
-        {% for recipe in recipes %}
-        <li>
-            <a href="{% url 'recipes:recipe_detail' recipe.id %}">{{ recipe.title }}</a>
-        </li>
-        {% endfor %}
-    </ul>
+<ul>
+  {% for recipe in recipes %}
+  <li>
+    <a href="{% url 'recipes:recipe_detail' recipe.id %}">{{ recipe.title }}</a>
+  </li>
+  {% endfor %}
+</ul>
 {% else %}
-    <p>No recipes are available.</p>
-{% endif %}
-{% endblock %}
-```
+<p>No recipes available.</p>
+{% endif %} {% endblock %} ```
