@@ -13,9 +13,19 @@
         </div>
         <div class="row">
             <div class="col-md-12">
+                <h3>Tags:</h3>
+                <ul>
+                    {% for tag in tags %}
+                        <li>{{ tag }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
                 <h3>Ingredients:</h3>
                 <ul>
-                    {% for ingredient in recipe.ingredients %}
+                    {% for ingredient in ingredients %}
                         <li>{{ ingredient }}</li>
                     {% endfor %}
                 </ul>
@@ -25,7 +35,7 @@
             <div class="col-md-12">
                 <h3>Steps:</h3>
                 <ul>
-                    {% for step in recipe.steps %}
+                    {% for step in steps %}
                         <li>{{ step }}</li>
                     {% endfor %}
                 </ul>
