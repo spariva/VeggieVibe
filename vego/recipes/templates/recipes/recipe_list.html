@@ -4,15 +4,17 @@
 <form method="get">
   <input type="text" name="title" value="{{ request.GET.title }}" />
   <input type="submit" value="Search recipe" />
-  <!-- For each tag I want to show an input of a checkbox with the name "tag"-->
+  <br>
     {% for tag in tags %}
-    <input type="checkbox" name="tag" value="{{ tag.name }}" {% if tag.id in request.GET.tag %}checked{% endif %} /> {{ tag.name }}
+    <input type="checkbox" name="tag" value="{{ tag.name }}" {% if tag.name in tags_selected %}checked {% endif %} /> {{ tag.name }}
     {% endfor %}
-  {% comment %} <input type="checkbox" name="is_vegetarian" {% if request.GET.is_vegetarian %}checked{% endif %} /> {% endcomment %}
+  <br>
+  <input type="text" name="ingredients" value="{{ request.GET.ingredients }}" placeholder="Ingredients separated by ','">
+    {% comment %} <input type="text" name="ingredients" value="{{ request.GET.ingredients }}"> {% endcomment %}
 </form>
 {% if object_list %}
 <ul>
-  {% for recipe in recipes %}
+  {% for recipe in object_list %}
   <li>
     <a href="{% url 'recipes:recipe_detail' recipe.id %}">{{ recipe.title }}</a>
   </li>
