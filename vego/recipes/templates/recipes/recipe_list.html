@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block content %}
-<h1>Home</h1>
-<p>Welcome to the home page!</p>
+<h1>Find your ideal recipe</h1>
+<p>Search by title, ingredients, tags...</p>
 <form method="get">
   <input type="text" name="title" value="{{ request.GET.title }}" />
   <input type="submit" value="Search recipe" />

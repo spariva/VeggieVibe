@@ -8,6 +8,8 @@
     <meta charset="utf-8">
     <meta author = "Maki Spariva">
     <meta description = "VeggieVibe es una aplicación web que te ayuda a encontrar recetas vegetarianas y veganas">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'recipes/styles.css' %}">
 </head>
 <body>
     <header>
@@ -15,7 +17,7 @@
             <ul>
                 <li><a href="{% url 'recipes:recipe_list' %}" class="btn btn-success">Home</a></li>
                 <li>Login</li>
-                <li style="blue">Categories</li>
+                <li>Categories</li>
             </ul>
         </nav>
     {% block content %}{% endblock %}

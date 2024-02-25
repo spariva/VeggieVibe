@@ -8,7 +8,7 @@ class Recipe(models.Model):
     ingredients = models.TextField()
     steps = models.TextField()
     tags = models.ManyToManyField('Tag', related_name='recipes', blank=True)
-    image = models.ImageField(upload_to='recipe_images/', blank=True)
+    image = models.ImageField(upload_to='recipes/static/recipes/images', blank=True)
     creator = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='created_recipes')
 
     def __str__(self):

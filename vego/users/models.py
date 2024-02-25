@@ -9,7 +9,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     # Campos adicionales que hay en profile y no en user
     bio = models.TextField(max_length=500, blank=True)
-    profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True)
+    profile_picture = models.ImageField(upload_to='users/static/users/images/', blank=True)
 
 # Decorator para que si un usuario se crea, se crea un perfil asociado, y lo mismo para cuando actualiza.
 @receiver(post_save, sender=User)
