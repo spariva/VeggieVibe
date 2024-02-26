@@ -10,6 +10,7 @@ class Recipe(models.Model):
     tags = models.ManyToManyField('Tag', related_name='recipes', blank=True)
     image = models.ImageField(upload_to='recipes/static/recipes/images', blank=True)
     creator = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='created_recipes')
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
