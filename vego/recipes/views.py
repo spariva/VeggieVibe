@@ -41,7 +41,7 @@ class RecipeListView(generic.ListView):
         for ingredient in ingredients_selected:
             queryset = queryset.filter(ingredients__icontains=ingredient.strip())
 
-        return queryset.distinct()
+        return queryset.distinct().order_by("-created_at")
 
 
 class RecipeDetailView(generic.DetailView):
