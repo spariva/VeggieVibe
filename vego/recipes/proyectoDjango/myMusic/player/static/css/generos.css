@@ -1,0 +1,47 @@
+.generosImg {
+    width: 250px;
+    height: 250px;
+    border-radius: 30%;
+    transition: 0.7s ease;
+}
+
+.generosImg:hover {
+    border-radius: 50%;
+}
+
+#bloqueGeneros{
+    margin: 20px;
+    padding: 20px;
+    border-radius: 50px;
+    background-color: whitesmoke;
+}
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+}
+
+li {
+    flex: 1 0 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+h2{
+    text-align: center;
+}
+
+@media screen and (max-width: 1000px) {
+    .generosImg {
+        width: 350px;
+        height: 350px;
+        border-radius: 30%;
+        transition: 0.7s ease;
+    }
+
+}

@@ -1,0 +1,82 @@
+.bloqueAlbum{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 50px;
+    background-color: whitesmoke;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.648);
+    text-align: center;
+}
+body{
+    text-align: center;
+}
+#linksGeneros{
+    text-align: center;
+    padding: 10px;
+}
+
+.textoInfo{
+    margin: 20px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.puntuacion12{
+    background-color: chocolate;
+    color:white;
+}
+
+.puntuacion34{
+    background-color: rgb(60, 72, 117);
+    color: white;
+}
+
+.puntuacion5{
+    background-color: rgb(72, 117, 60);
+    color: white;
+}
+
+.albumesImg {
+    width: 250px;
+    height: 250px;
+    border-radius: 30%;
+    transition: 0.7s ease;
+    object-fit: cover;
+}
+
+.albumesImg:hover {
+    border-radius: 50%;
+}
+
+#bloqueAlbumes{
+    margin: 20px;
+    padding: 20px;
+    border-radius: 50px;
+    background-color: whitesmoke;
+}
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+}
+
+li {
+    flex: 1 0 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+h2{
+    text-align: center;
+}
+

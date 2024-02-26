@@ -1,0 +1,56 @@
+{% load static %}
+{% include "base.html" %}
+<!--con include en vez de extends metemos el bloque aqui, con extends hariamos que index sea como hijo de base.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>myMusic</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sesion.css' %}">
+</head>
+
+<body>
+    {% block content %}
+    {% if user.is_authenticated %}
+    <h1>Bienvenidx a tu disquette personal</h1>
+    {% else %}
+    <p id="avisoInicioSesion">Inicia sesión si quieres continuar a la web</p>
+    <p> <a href="/register">¿Todavia no tienes usuario?</a> </p>
+    {% endif %}
+    <p>¿Quieres empezar? ¡Haz click en el casette!</p>
+    <a href="/generos"><img id="casetteImg" src="{% static 'img/casette.jpg' %}" alt="disquette"></a>
+    <br>
+    <div id="bloqueIndex">
+        <div id="bloqueArtistas">
+            <p>Aqui tienes el listado de algunos de nuestros artistas:</p>
+            <ul>
+                {% if artistas %}
+                <ul>
+                    {% for artista in artistas %}
+                    <li>{{ artista.artista_nombre }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>Problema al cargar los artistas :(</p>
+                {% endif %}
+            </ul>
+        </div>
+        <div id="bloqueFavs">
+            {% if user.is_authenticated %}
+            <p>Tus artistas favoritos:</p>
+            <ul>
+                {% for artista in artistas_favoritos %}
+                <li>{{ artista.artista_nombre }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>Para ver tus artistas favoritos, inicia sesión</p>
+            {% endif %}
+
+            {% endblock %}
+        </div>
+    </div>
+</body>
+
+</html>
