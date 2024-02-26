@@ -9,13 +9,15 @@
     <meta author = "Maki Spariva">
     <meta description = "VeggieVibe es una aplicación web que te ayuda a encontrar recetas vegetarianas y veganas">
     {% load static %}
+    <link rel="icon" href="{% static '/recipes/images/onion.png' %}" type="image/png">
     <link rel="stylesheet" href="{% static 'recipes/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'recipes/normalize.css' %}">
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="{% url 'recipes:recipe_list' %}" class="btn btn-success">Home</a></li>
+                <li><a href="{% url 'recipes:recipe_list' %}" class="btn btn-success"><img src="{% static 'recipes/images/onionpurple.jpg' %}" alt="VeggieVibe" class="logo"></a></li>
                 <li>Login</li>
                 <li>Categories</li>
             </ul>

@@ -8,3 +8,13 @@ body{
     background: rgb(117, 221, 188) url("images/boloñesabrothers.png") no-repeat;
     color: rgb(239, 232, 232);
 }
+
+img{
+    max-width: 300px;
+    max-height: 300px;
+}
+
+logo{
+    max-width: 100px;
+    max-height: 100px;
+}
