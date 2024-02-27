@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from recipes.models import Recipe, Tag
 from django.views import generic
+
 # from django.db.models import Q, Count
 # from django.core.paginator import Paginator
 # from django.shortcuts import render
@@ -8,13 +9,18 @@ from django.views import generic
 
 class RecipeListView(generic.ListView):
     model = Recipe
-    paginate_by = 10
+    paginate_by = 3
     context_object_name = "recipes"  # your own name for the list as a template variable, default is object_list and you can use both
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["tags"] = Tag.objects.all()
         context["tags_selected"] = self.request.GET.getlist("tag", "")
+        ## I use copy to avoid modifying the original querydict, and then I remove the page parameter, so it doesn't appear in the url_params. Because later I add page in the template, and once I moved to other page it got duplicated.
+        query = self.request.GET.copy()
+        query.pop('page', None)
+        context["url_params"] = query.urlencode() + "&"
+
         return context
 
     def get_queryset(self):
@@ -41,7 +47,7 @@ class RecipeListView(generic.ListView):
         for ingredient in ingredients_selected:
             queryset = queryset.filter(ingredients__icontains=ingredient.strip())
 
-        return queryset.distinct()
+        return queryset.distinct().order_by("-created_at")
 
 
 class RecipeDetailView(generic.DetailView):
@@ -53,4 +59,8 @@ class RecipeDetailView(generic.DetailView):
         context["tags"] = self.object.tags.all()
         context["ingredients"] = self.object.ingredients.split(",")
         context["steps"] = self.object.steps.split(".")
+        ## Remove last empty step, because ppl usually add a dot at the end of the last step:
+        context["steps"] = [
+            step for step in context["steps"] if step
+        ]  # remove empty strings
         return context

@@ -1,0 +1,21 @@
+body{
+    background-color: rgb(186, 234, 221) !important;
+    color: rgb(37, 36, 36) !important;
+}
+
+img{
+    max-width: 400px;
+    max-height: auto;
+}
+
+#home-icon{
+	max-width:90px;
+	display: inline-block;
+    padding: -10px;
+    margin: -20px 10px -10px 15px;
+}
+
+.card-hover:hover{
+    transition: transform 0.2s;
+    scale: 1.1;
+}

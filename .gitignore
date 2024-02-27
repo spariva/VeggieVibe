@@ -58,8 +58,6 @@ cover/
 # Django stuff:
 *.log
 local_settings.py
-db.sqlite3
-db.sqlite3-journal
 # Created by https://www.gitignore.io
 
 ### OSX ###
@@ -148,7 +146,7 @@ __pycache__/
 local_settings.py
 
 .env
-db.sqlite3
+
 # Flask stuff:
 instance/
 .webassets-cache

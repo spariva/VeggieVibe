@@ -1,25 +1,87 @@
 {% extends "base.html" %} {% block content %}
-<h1>Home</h1>
-<p>Welcome to the home page!</p>
-<form method="get">
-  <input type="text" name="title" value="{{ request.GET.title }}" />
-  <input type="submit" value="Search recipe" />
-  <br>
-    {% for tag in tags %}
-    <input type="checkbox" name="tag" value="{{ tag.name }}" {% if tag.name in tags_selected %}checked {% endif %} /> {{ tag.name }}
+{% load static %}
+<main>
+  <div class="container">
+    <div class="text-center">
+      <h1>Find your ideal recipe</h1>
+      <p>Search by title, ingredients, tags...</p>
+    </div>
+    <div class="text-center ms-4">
+      <form class="mb-3 ms-5 pt-4" method="get">
+        <input class="form-control w-75 ms-5 text-center" type="text" name="title" value="{{ request.GET.title }}" />
+        <div class="d-flex flex-wrap justify-content-end w-50 mt-3 ms-5">
+          {% for tag in tags %} 
+          {% comment %} <input type="checkbox" name="tag" value="{{ tag.name }}" {% if tag.name in tags_selected %}checked {% endif %} /> {{ tag.name }} {% endcomment %}
+          <div class="form-check form-check-inline ms-4 me-4">
+            <input class="form-check-input" type="checkbox" name="tag" value="{{ tag.name }}" {% if tag.name in tags_selected %}checked {% endif %} >
+            <label class="form-check-label" for="inlineCheckbox1">{{ tag.name }}</label>
+          </div>
+          {% endfor %}
+        </div>
+        <input class="form-control w-25 ps-5 ms-5 mt-2" type="text" name="ingredients" value="{{ request.GET.ingredients }}" placeholder="Ingredients separated by ','">
+        <button type="submit" class="btn btn-outline-success w-25 me-5 pb-2">Search recipe!<svg class="ms-2" width="40px" height="40px" viewBox="0 0 36.00 36.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--twemoji" preserveAspectRatio="xMidYMid meet" fill="#000000" transform="rotate(0)matrix(-1, 0, 0, 1, 0, 0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.072"></g><g id="SVGRepo_iconCarrier"><path fill="#55add3" d="M26.617 32.441a4.017 4.017 0 0 0-1.025-1.172c.103-.421.056-.835-.307-1.103c-.9-.662-8.82.226-9.386 3.057c-.234 1.171.588 1.171 1.038.809c-.137.499-.212 1.011-.169 1.49a.49.49 0 0 0 .975-.087c-.03-.334.022-.694.111-1.051c.201.18.424.327.686.269c.312-.07.51-.378.64-.712c.015.212.046.348.05.363a.487.487 0 0 0 .593.345l.006-.002a.492.492 0 0 0 .348-.591a1.889 1.889 0 0 1-.019-.565c.442.267 1 .509 1.457.398c.581-.142.859-.631.997-1.113c.439.412.698.895.958 1.454a.489.489 0 1 0 .887-.412c-.185-.399-.414-.88-.793-1.348c.346.231.711.393.95.253c.166-.097.364-.302.545-.553c.377.336.589.721.592.727a.491.491 0 0 0 .662.202a.486.486 0 0 0 .204-.658z"></path><path fill="#ffd9ec" d="M21.708 6.32c-2.741-.932-5.978-3.134-6.754-6.03c-.273-1.02-.952 1.29-1.891 1.541c-.939.252-2.682-1.409-2.408-.389c.776 2.896-.926 6.422-2.834 8.599c-3.575 4.08-6.287 8.95-4.89 14.165c2 7.465 10.1 10.746 18.41 8.519s13.684-9.118 11.684-16.582c-1.398-5.215-6.182-8.077-11.317-9.823z"></path><path fill="#d36997" d="M13.66 32.585c-3.296-1.993-7.838-5.273-8.227-11.23c-.425-6.519 4.936-10.098 5.304-13.826c.444 4.428-3.559 7.236-3.214 12.866c.313 5.101 2.429 8.841 6.137 12.19z"></path><path fill="#d36997" d="M19.764 32.885c-3.097-1.934-6.932-5.916-7.944-11.203c-1.457-7.611 1.103-12.145.203-17.89c1.897 6.644 1.034 9.757 2.302 16.336c.825 4.282 2.9 10.213 5.439 12.757zm8.158-4.121c1.858-3.374 4.302-8.526 1.66-13.88c-2.891-5.858-9.474-6.237-11.657-9.281c1.829 4.057 6.85 4.447 9.367 9.495c2.28 4.574 2.166 8.912.63 13.666z"></path><path fill="#d36997" d="M22.786 32.076c1.715-3.223 3.045-8.589 1.278-13.674c-2.543-7.32-7.027-9.966-9.121-15.392c1.679 6.703 3.983 8.966 6.174 15.298c1.427 4.12 2.596 10.295 1.669 13.768z"></path></g></svg></button>
+        
+        <br>
+          {% comment %} <input type="text" name="ingredients" value="{{ request.GET.ingredients }}"> {% endcomment %}
+      </form>
+    </div>
+  {% comment %} {% if object_list %}
+  <ul>
+    {% for recipe in object_list %}
+    <li>
+      <a href="{% url 'recipes:recipe_detail' recipe.id %}">{{ recipe.title }}</a>
+    </li>
     {% endfor %}
-  <br>
-  <input type="text" name="ingredients" value="{{ request.GET.ingredients }}" placeholder="Ingredients separated by ','">
-    {% comment %} <input type="text" name="ingredients" value="{{ request.GET.ingredients }}"> {% endcomment %}
-</form>
-{% if object_list %}
-<ul>
-  {% for recipe in object_list %}
-  <li>
-    <a href="{% url 'recipes:recipe_detail' recipe.id %}">{{ recipe.title }}</a>
-  </li>
+  </ul>
+  {% else %}
+  <p>No recipes available.</p>
+  {% endif %} {% endcomment %}
+  <style>
+    .card-hover:hover {
+      box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+      transition: ease-in-out 0.4s;
+      scale: 1.1;
+    }
+  </style>
+  <div class="d-flex flex-wrap justify-content-around">
+  {% for recipe in page_obj %}
+  <div class="card text-center card-hover" style="width: 20rem;">
+    <a href="{% url 'recipes:recipe_detail' recipe.id %}">
+    <img src="{{ recipe.image.url }}" class="card-img-top" alt="{{recipe.title}} image" height:"290px">
+    </a>
+    <div class="card-body">
+      <h5 class="card-title align-self-start">{{ recipe.title }}</h5>
+      <div class="d-flex justify-content-center mb-0">
+        <a href="#" class="btn btn-outline-warning w-75">Save for later <svg width="44px" height="44px" viewBox="-102.4 -102.4 1228.80 1228.80" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000" stroke="#000000" stroke-width="0.01024" transform="matrix(1, 0, 0, 1, 0, 0)rotate(0)"><g id="SVGRepo_bgCarrier" stroke-width="0"><path transform="translate(-102.4, -102.4), scale(76.8)" fill="#afeedd" d="M9.166.33a2.25 2.25 0 00-2.332 0l-5.25 3.182A2.25 2.25 0 00.5 5.436v5.128a2.25 2.25 0 001.084 1.924l5.25 3.182a2.25 2.25 0 002.332 0l5.25-3.182a2.25 2.25 0 001.084-1.924V5.436a2.25 2.25 0 00-1.084-1.924L9.166.33z" strokewidth="0"></path></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M836.8128 401.8688c-18.1248 18.0736-40.9088 29.7472-65.6384 33.792-6.5536 1.0752-13.2096 1.6384-19.968 1.6384-16.1792 0-31.8464-3.1232-46.336-9.1648-14.4896-5.9904-27.8016-14.848-39.2192-26.2656a22.34368 22.34368 0 0 0-31.6416 0 22.34368 22.34368 0 0 0 0 31.6416c30.6176 30.6176 71.2192 47.8208 114.4832 48.4864l-41.6768 369.8688h-64.4608v-193.3312c0-12.3392-9.984-22.3744-22.3744-22.3744-12.3392 0-22.3744 10.0352-22.3744 22.3744v193.3312h-62.3104v-331.264-0.0512c0-12.3392-10.0352-22.3232-22.3744-22.3232-12.3904 0-22.3744 10.0352-22.3744 22.3744v331.264H428.1856v-193.3312c0-12.3392-9.984-22.3744-22.3744-22.3744-12.3392 0-22.3744 10.0352-22.3744 22.3744v193.3312H319.2832l-41.8304-370.432a165.376 165.376 0 0 0 103.2704-47.9232 22.44096 22.44096 0 0 0 0-31.3344 22.34368 22.34368 0 0 0-31.6416-0.3072 121.13408 121.13408 0 0 1-94.2592 35.1232c-0.3072-0.0512-0.6656-0.1024-1.024-0.1024a121.02144 121.02144 0 0 1-75.8784-35.0208c-47.0016-47.1552-46.9504-123.904 0.1536-171.008 47.2064-47.1552 124.0064-47.1552 171.1616 0a22.34368 22.34368 0 0 0 31.3344 0c2.6112-2.56 4.4544-5.5808 5.5296-8.8064 1.4848-2.9696 2.304-6.2976 2.304-9.7792 0-66.7648 54.3232-121.0368 121.0368-121.0368 64.4608 0 117.4016 50.7904 120.832 114.6368a22.17984 22.17984 0 0 0 5.12 23.6032 22.34368 22.34368 0 0 0 31.6416 0l1.3824-1.3824c47.1552-45.6704 123.2896-45.056 169.7792 1.3824 22.8352 22.8352 35.4304 53.248 35.4304 85.6064 0 32.1536-12.4928 62.464-35.1232 85.248-0.1024 0.1024-0.2048 0.1536-0.3072 0.3072-0.4608 0.3584-0.9216 0.768-1.3824 1.2288z" fill="#ffffff"></path><path d="M701.7984 896.6144l-3.8912 34.304H328.192l-3.8912-34.304h295.68z" fill="#ffd9ec"></path><path d="M869.8368 197.8368c-53.7088-53.7088-136.448-62.6688-199.7824-26.4704-18.2272-71.68-83.4048-124.8768-160.6144-124.8768-45.6704 0-87.1424 18.5856-117.1456 48.5888A165.69856 165.69856 0 0 0 348.16 173.824c-63.5904-37.6832-147.0976-29.184-201.728 25.3952-64.512 64.5632-64.6144 169.6256-0.2048 234.24l0.256 0.256c23.552 23.5008 53.4528 39.168 85.6576 45.312l44.8512 397.2608c0 0.2048 0.0512 0.3584 0.0512 0.5632l8.9088 78.9504a22.3744 22.3744 0 0 0 22.2208 19.8656h409.7024c11.4176 0 20.992-8.5504 22.2208-19.8656l8.9088-79.0016 45.2096-400.384c7.0144-1.8432 13.824-4.1472 20.48-6.912 19.456-8.0384 37.376-19.8656 53.4528-35.6864l0.3072-0.3072c0.4608-0.3584 0.9216-0.768 1.3824-1.2288 31.2832-31.2832 48.5376-72.9088 48.5376-117.1968s-17.2032-85.9648-48.5376-117.248z m-171.9296 733.0816H328.192l-3.8912-34.304h377.4976l-3.8912 34.304z m140.5952-530.5856c-0.1024 0.1024-0.2048 0.1536-0.3072 0.3072-0.4608 0.3584-0.9216 0.768-1.3824 1.2288-18.1248 18.0736-40.9088 29.7472-65.6384 33.792-6.5536 1.0752-13.2096 1.6384-19.968 1.6384-16.1792 0-31.8464-3.1232-46.336-9.1648-14.4896-5.9904-27.8016-14.848-39.2192-26.2656a22.34368 22.34368 0 0 0-31.6416 0 22.34368 22.34368 0 0 0 0 31.6416c30.6176 30.6176 71.2192 47.8208 114.4832 48.4864l-41.6768 369.8688h-64.4608v-193.3312c0-12.3392-9.984-22.3744-22.3744-22.3744-12.3392 0-22.3744 10.0352-22.3744 22.3744v193.3312h-62.3104v-331.264-0.0512c0-12.3392-10.0352-22.3232-22.3744-22.3232-12.3904 0-22.3744 10.0352-22.3744 22.3744v331.264H428.1856v-193.3312c0-12.3392-9.984-22.3744-22.3744-22.3744-12.3392 0-22.3744 10.0352-22.3744 22.3744v193.3312H319.2832l-41.8304-370.432a165.376 165.376 0 0 0 103.2704-47.9232 22.44096 22.44096 0 0 0 0-31.3344 22.34368 22.34368 0 0 0-31.6416-0.3072 121.13408 121.13408 0 0 1-94.2592 35.1232c-0.3072-0.0512-0.6656-0.1024-1.024-0.1024a121.02144 121.02144 0 0 1-75.8784-35.0208c-47.0016-47.1552-46.9504-123.904 0.1536-171.008 47.2064-47.1552 124.0064-47.1552 171.1616 0a22.34368 22.34368 0 0 0 31.3344 0c2.6112-2.56 4.4544-5.5808 5.5296-8.8064 1.4848-2.9696 2.304-6.2976 2.304-9.7792 0-66.7648 54.3232-121.0368 121.0368-121.0368 64.4608 0 117.4016 50.7904 120.832 114.6368a22.17984 22.17984 0 0 0 5.12 23.6032 22.34368 22.34368 0 0 0 31.6416 0l1.3824-1.3824c47.1552-45.6704 123.2896-45.056 169.7792 1.3824 22.8352 22.8352 35.4304 53.248 35.4304 85.6064 0 32.1536-12.4928 62.464-35.1232 85.248z" fill="#4e70bc"></path></g></svg></a>
+      </div>
+    </div>
+  </div>
+    {% comment %} <a href="{% url 'recipes:recipe_detail' recipe.id %}"><img class="p-1 m-2"src="{{ recipe.image.url }}" alt="{{ recipe.title }} image" width="400" height="400"></a> {% endcomment %}
   {% endfor %}
-</ul>
-{% else %}
-<p>No recipes available.</p>
-{% endif %} {% endblock %} ```
+  </div>
+  {% if object_list %}
+  <nav class="mt-4 align-self-end" aria-label="Page navigation">
+      <ul class="step-links pagination justify-content-center">
+          {% if page_obj.has_previous %}
+              <li class="page-item"><a class="page-link" href="?{{url_params}}page=1">First</a></li>
+              <li class="page-item"><a class="page-link" href="?{{url_params}}page={{ page_obj.previous_page_number }}" aria-label="previous">&laquo;</a></li>
+          {% endif %}
+          <li class="page-item current"><a class="page-link bg-warning-subtle text-info" href="?page=1">{{ page_obj.number }}</a></li>
+  {% else %}
+    <div class="text-center">
+    <img src="{% static 'recipes/images/general/onion_sad.jfif' %}" alt="sad face" width="200" height="200" style="border-radius:60%"><p class="text-tertiary">We don't have any recipe like that yet, maybe you could create the first one!</p>
+    {% comment %} <img src="{% static 'recipes/images/general/onionorange.jpg' %}" alt="happy face" width="200" height="200" style="border-radius:100px"> {% endcomment %}
+    </div>
+  {% endif %}
+          {% if page_obj.has_next %}
+              <li class="page-item"><a class="page-link" href="?{{url_params}}page={{ page_obj.next_page_number }}" aria-label="next">&raquo;</a></li>
+              <li class="page-item"><a class="page-link" href="?{{url_params}}page={{ page_obj.paginator.num_pages}}"> Last</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+      <span class="current justify-content-center pagination text-info align-self-end">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+      </span>
+  </div>
+</main>
+{% endblock %} ```
