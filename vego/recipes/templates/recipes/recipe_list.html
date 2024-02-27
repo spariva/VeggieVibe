@@ -1,66 +1,74 @@
 {% extends "base.html" %} {% block content %}
 {% load static %}
-<h1>Find your ideal recipe</h1>
-<p>Search by title, ingredients, tags...</p>
-<form method="get">
-  <input type="text" name="title" value="{{ request.GET.title }}" />
-  <input type="submit" value="Search recipe" />
-  <br>
-    {% for tag in tags %}
-    <input type="checkbox" name="tag" value="{{ tag.name }}" {% if tag.name in tags_selected %}checked {% endif %} /> {{ tag.name }}
+<main>
+  <div class="container">
+    <div class="text-center">
+      <h1>Find your ideal recipe</h1>
+      <p>Search by title, ingredients, tags...</p>
+    </div>
+    <div class="">
+      <form class="mb-3 pt-4" method="get">
+        <input class="form-control w-75" type="text" name="title" value="{{ request.GET.title }}" />
+        <input type="submit" value="Search recipe" />
+        <br>
+        <div class="form-check form-check-">
+          {% for tag in tags %}
+          <input type="checkbox" name="tag" value="{{ tag.name }}" {% if tag.name in tags_selected %}checked {% endif %} /> {{ tag.name }}
+          {% endfor %}
+        </div>
+        <br>
+        <input class="form-control w-25" type="text" name="ingredients" value="{{ request.GET.ingredients }}" placeholder="Ingredients separated by ','">
+          {% comment %} <input type="text" name="ingredients" value="{{ request.GET.ingredients }}"> {% endcomment %}
+      </form>
+    </div>
+  {% comment %} {% if object_list %}
+  <ul>
+    {% for recipe in object_list %}
+    <li>
+      <a href="{% url 'recipes:recipe_detail' recipe.id %}">{{ recipe.title }}</a>
+    </li>
     {% endfor %}
-  <br>
-  <input type="text" name="ingredients" value="{{ request.GET.ingredients }}" placeholder="Ingredients separated by ','">
-    {% comment %} <input type="text" name="ingredients" value="{{ request.GET.ingredients }}"> {% endcomment %}
-</form>
-{% comment %} {% if object_list %}
-<ul>
-  {% for recipe in object_list %}
-  <li>
-    <a href="{% url 'recipes:recipe_detail' recipe.id %}">{{ recipe.title }}</a>
-  </li>
-  {% endfor %}
-</ul>
-{% else %}
-<p>No recipes available.</p>
-{% endif %} {% endcomment %}
-{% for recipe in page_obj %}
-  <a href="{% url 'recipes:recipe_detail' recipe.id %}">{{ recipe.title }}</a>
-    ...
-{% endfor %}
-
-<nav aria-label="Page navigation">
-  <ul class="pagination justify-content-center">
-    <li class="page-item">
-      <a class="page-link">Previous</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
-    </li>
   </ul>
-</nav>
-
-{% if object_list %}
-<nav class="" aria-label="Page navigation">
-    <ul class="step-links pagination justify-content-center">
-        {% if page_obj.has_previous %}
-            <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="previous">&laquo;</a></li>
-        {% endif %}
-        <li class="page-item current"><a class="page-link bg-warning-subtle text-info" href="?page=1">{{ page_obj.number }}</a></li>
-{% else %}
-  <img src="{% static 'recipes/images/onion_sad.jfif' %}" alt="sad face" width="50" height="50">
-  <p>We don't have any recipe like that yet, maybe you could create the first one!</p>
-  <img src="{% static 'recipes/images/onionorange.jpg' %}" alt="happy face" width="50" height="50">
-{% endif %}
-        {% if page_obj.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="next">&raquo;</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}"> Last</a></li>
-        {% endif %}
-      </ul>
-    </nav>
-    <span class="current justify-content-center pagination text-info">
-      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-    </span>
+  {% else %}
+  <p>No recipes available.</p>
+  {% endif %} {% endcomment %}
+  <div class="d-flex flex-wrap justify-content-around">
+  {% for recipe in page_obj %}
+  <div class="card text-center" style="width: 20rem;">
+    <a href="{% url 'recipes:recipe_detail' recipe.id %}">
+    <img src="{{ recipe.image.url }}" class="card-img-top" alt="..." height:"290px">
+    </a>
+    <div class="card-body">
+      <h5 class="card-title">{{ recipe.title }}</h5>
+      <a href="#" class="btn btn-warning w-75">Save for later <svg fill="#f61ec7" height="64px" width="64px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-231.13 -231.13 933.96 933.96" xml:space="preserve" stroke="#f61ec7" stroke-width="9.43402"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.9434020000000001"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M433.601,67.001c-24.7-24.7-57.4-38.2-92.3-38.2s-67.7,13.6-92.4,38.3l-12.9,12.9l-13.1-13.1 c-24.7-24.7-57.6-38.4-92.5-38.4c-34.8,0-67.6,13.6-92.2,38.2c-24.7,24.7-38.3,57.5-38.2,92.4c0,34.9,13.7,67.6,38.4,92.3 l187.8,187.8c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-3.9l188.2-187.5c24.7-24.7,38.3-57.5,38.3-92.4 C471.801,124.501,458.301,91.701,433.601,67.001z M414.401,232.701l-178.7,178l-178.3-178.3c-19.6-19.6-30.4-45.6-30.4-73.3 s10.7-53.7,30.3-73.2c19.5-19.5,45.5-30.3,73.1-30.3c27.7,0,53.8,10.8,73.4,30.4l22.6,22.6c5.3,5.3,13.8,5.3,19.1,0l22.4-22.4 c19.6-19.6,45.7-30.4,73.3-30.4c27.6,0,53.6,10.8,73.2,30.3c19.6,19.6,30.3,45.6,30.3,73.3 C444.801,187.101,434.001,213.101,414.401,232.701z"></path> </g> </g></svg></a>
+    </div>
+  </div>
+    {% comment %} <a href="{% url 'recipes:recipe_detail' recipe.id %}"><img class="p-1 m-2"src="{{ recipe.image.url }}" alt="{{ recipe.title }} image" width="400" height="400"></a> {% endcomment %}
+  {% endfor %}
+  </div>
+  {% if object_list %}
+  <nav class="mt-4 align-self-end" aria-label="Page navigation">
+      <ul class="step-links pagination justify-content-center">
+          {% if page_obj.has_previous %}
+              <li class="page-item"><a class="page-link" href="?{{url_params}}page=1">First</a></li>
+              <li class="page-item"><a class="page-link" href="?{{url_params}}page={{ page_obj.previous_page_number }}" aria-label="previous">&laquo;</a></li>
+          {% endif %}
+          <li class="page-item current"><a class="page-link bg-warning-subtle text-info" href="?page=1">{{ page_obj.number }}</a></li>
+  {% else %}
+    <div class="text-center">
+    <img src="{% static 'recipes/images/general/onion_sad.jfif' %}" alt="sad face" width="200" height="200" style="border-radius:60%"><p class="text-tertiary">We don't have any recipe like that yet, maybe you could create the first one!</p>
+    {% comment %} <img src="{% static 'recipes/images/general/onionorange.jpg' %}" alt="happy face" width="200" height="200" style="border-radius:100px"> {% endcomment %}
+    </div>
+  {% endif %}
+          {% if page_obj.has_next %}
+              <li class="page-item"><a class="page-link" href="?{{url_params}}page={{ page_obj.next_page_number }}" aria-label="next">&raquo;</a></li>
+              <li class="page-item"><a class="page-link" href="?{{url_params}}page={{ page_obj.paginator.num_pages}}"> Last</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+      <span class="current justify-content-center pagination text-info align-self-end">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+      </span>
+  </div>
+</main>
 {% endblock %} ```
