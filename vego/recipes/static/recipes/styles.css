@@ -1,11 +1,6 @@
 body{
-    background-color: rgb(230, 179, 113);
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-align: center;
-    color: rgb(239, 232, 232);
+    background-color: rgb(186, 234, 221) !important;
+    color: rgb(37, 36, 36) !important;
 }
 
 img{
@@ -19,4 +14,3 @@ img{
     padding: -10px;
     margin: -20px 10px -10px 15px;
 }
-

@@ -8,7 +8,7 @@ from django.views import generic
 
 class RecipeListView(generic.ListView):
     model = Recipe
-    paginate_by = 10
+    paginate_by = 6
     context_object_name = "recipes"  # your own name for the list as a template variable, default is object_list and you can use both
 
     def get_context_data(self, **kwargs):
@@ -53,4 +53,6 @@ class RecipeDetailView(generic.DetailView):
         context["tags"] = self.object.tags.all()
         context["ingredients"] = self.object.ingredients.split(",")
         context["steps"] = self.object.steps.split(".")
+        ## Remove last empty step, because ppl usually add a dot at the end of the last step:
+        context["steps"] = [step for step in context["steps"] if step] # remove empty strings
         return context
