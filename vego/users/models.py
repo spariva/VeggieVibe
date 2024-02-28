@@ -36,12 +36,11 @@ class Favourite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
     
     class Meta:
         unique_together = ('user', 'recipe')
-        verbose_name = 'favorite recipe'
-        verbose_name_plural = 'fav recipes'
+        verbose_name = 'fav_recipe'
+        verbose_name_plural = 'fav_recipes'
     
     def __str__(self):
         return f'{self.user.username} likes: {self.recipe.title}'

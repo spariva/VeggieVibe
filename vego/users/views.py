@@ -12,7 +12,7 @@ class ProfileView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.get_object()
-        context['fav recipes'] = Favourite.objects.filter(user=user)
+        context['fav_recipes'] = Favourite.objects.filter(user=user)
         context['profile'] = user.profile 
         return context
     

@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My Site</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
     {% if request.user.is_authenticated %}
         <p>Hola {{ request.user.username }}! 
             <form method="post" action="{% url 'logout' %}">
                 {% csrf_token %}
                 <button type="submit">Logout</button>
+            </form>
     {% else %}
         <p>No tienes sesión iniciada <a href="{% url 'login' %}">Login</a></p>
     {% endif %}
-
-    {% block content %}{% endblock %}
-</body>
-</html>
+{% endblock %}
+```
