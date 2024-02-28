@@ -8,5 +8,5 @@ app_name = "recipes"
 urlpatterns = [
     path("", views.RecipeListView.as_view(), name="recipe_list"),
     path("recipe/<int:pk>", views.RecipeDetailView.as_view(), name="recipe_detail"),
-    path("users/<int:pk>/", include(users_urlpatterns), name="profile_detail"),
 ]
+# path("create/", views.RecipeCreateView.as_view(), name="create_recipe"),

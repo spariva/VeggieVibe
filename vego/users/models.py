@@ -10,6 +10,9 @@ class Profile(models.Model):
     # Campos adicionales que hay en profile y no en user
     bio = models.TextField(max_length=500, blank=True)
     profile_picture = models.ImageField(upload_to='users/static/users/images/', blank=True)
+    
+    def __str__(self):
+        return f'{self.user.username} profile'
 
 # Decorator para que si un usuario se crea, se crea un perfil asociado, y lo mismo para cuando actualiza.
 @receiver(post_save, sender=User)
