@@ -7,6 +7,16 @@
                 <button type="submit">Logout</button>
             </form>
     {% endif %}
+    {% if user.fav_recipes %}
+        <h2>Recetas favoritas</h2>
+        <ul>
+            {% for recipe in fav_recipes %}
+                <li><a href="{% url 'recipes:recipe_detail' %}">{{ recipe.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aún no tienes recetas favoritas =0</p>
+    {% endif %}
 {% include "recipes/create_recipe.html" %}
 {% endblock %}
 ```

@@ -1,7 +1,9 @@
 {% block content %}
-    <h1>Add new recipe</h1>
+    <h2 class="cormorant">Add new recipe</h2>
+    <a href="{% url 'recipes:create_recipe' %}">Let's go!</a>
     <form method="post">
         {% csrf_token %}
+        {{ form.as_p }}
         <button type="submit">Add recipe</button>
     </form>
 {% endblock %}

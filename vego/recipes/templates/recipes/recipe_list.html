@@ -38,7 +38,9 @@
   {% for recipe in page_obj %}
   <div class="card text-center card-hover" style="width: 20rem;">
     <a href="{% url 'recipes:recipe_detail' recipe.id %}">
+    {% if recipe.image %}
     <img src="{{ recipe.image.url }}" class="card-img-top" alt="{{recipe.title}} image" height:"290px">
+    {% endif %}
     </a>
     <div class="card-body">
       <h5 class="card-title align-self-start">{{ recipe.title }}</h5>
