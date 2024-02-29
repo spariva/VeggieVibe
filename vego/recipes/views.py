@@ -58,12 +58,21 @@ class RecipeDetailView(generic.DetailView):
 class RecipeCreateView(generic.CreateView):
     model = Recipe
     fields = ["title", "description", "ingredients", "steps", "tags", "image"]
-    template_name = "recipes/recipe_form.html"
+    template_name = "recipes/create_recipe.html"
+    success_url = "/users/user/"
 
 # This method sets the user attribute of the Recipe instance to the currently logged-in user.
     def form_valid(self, form):
+        recipe = form.save(commit=False)
+        recipe.user = self.request.user
         form.instance.user = self.request.user
+        recipe.save()
         return super().form_valid(form)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["tags"] = Tag.objects.all()
+        return context
     
 
 # class RecipeUpdateView(generic.UpdateView):

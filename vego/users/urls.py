@@ -10,5 +10,5 @@ urlpatterns = [
     # para login
     path("accounts/", include("django.contrib.auth.urls")),
     path("accounts/logout/", LogoutView.as_view(), name="logout"),
-    path("accounts/signup/", views.SignUpView.as_view(), name="signup"),
+    path("signup/", views.SignUpView.as_view(), name="signup"),
 ]
