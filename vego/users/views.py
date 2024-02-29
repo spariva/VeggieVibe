@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from django.views.generic import DetailView
+from django.views.generic import DetailView, CreateView
 from .models import User, Profile, Favourite
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import login, authenticate
 
 
 class ProfileView(LoginRequiredMixin, DetailView):
@@ -19,11 +20,26 @@ class ProfileView(LoginRequiredMixin, DetailView):
 
     def get_object(self):
         return self.request.user
-    
-class SignUpView(DetailView):
+
+
+class SignUpView(CreateView):
     model = User
-    template_name = 'users/signup.html'
-    context_object_name = 'user'
+    fields = ["username", "email", "password"]
+    template_name = "users/signup.html"
+    success_url = "/users/user/"
+    context_object_name = "user"
+
+    def form_valid(self, form):
+        user = form.save(commit=False)
+        user.set_password(form.cleaned_data["password"])
+        user.save()
+
+        user = authenticate(
+            self.request, username=user.username, password=form.cleaned_data["password"]
+        )
+
+        login(self.request, user)
+        return super().form_valid(form)
 
     def get_object(self):
         return self.request.user

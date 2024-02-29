@@ -2,31 +2,12 @@
 {% load static %}
 <main>
   <div class="container text-center">
-      <style>
-        .cormorant{
-          font-family: "Cormorant Garamond", serif;
-          {% comment %} color: #d36997;
-          color: #3cc0f9; {% endcomment %}
-          font-weight: 400;
-          color: #dc76a2;
-        }
-        h2 {
-          font-style: italic;
-          font-size: 3.4rem;
-        }
-        .card-hover:hover {
-          box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
-          transition: ease-in-out 0.4s;
-          scale: 1.1;
-        }
-      </style>
-      
     <div class="me-5 p-1">
       <h2 class="cormorant pt-3 ms-5">Find your ideal recipe</h2>
       <h4 class="cormorant ms-5">Search by title, ingredients, tags...</h4>
       <form class="mb-3 pt-2 ms-5 container d-flex justify-content-center flex-wrap" method="get">
         <input class="form-control w-75 text-center" type="text" name="title" value="{{ request.GET.title }}"/>
-        <div class="d-flex flex-wrap justify-content-md-end justify-content-sm-evenly justify-content-start w-50 mt-3">
+        <div class="d-flex flex-wrap justify-content-lg-end justify-content-md- justify-content-start w-50 mt-3">
           {% for tag in tags %} 
           {% comment %} <input type="checkbox" name="tag" value="{{ tag.name }}" {% if tag.name in tags_selected %}checked {% endif %} /> {{ tag.name }} {% endcomment %}
           <div class="form-check form-check-inline ms-4 me-4">

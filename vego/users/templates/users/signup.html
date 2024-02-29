@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<style>
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eeff;
+}
+.gradient-custom-2 {
+  /* fallback for old browsers */
+  background: #dc76a2;
+  
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, #dc76a2, #d8363a, #dd3675, #b44593);
+  
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, #dc76a2, #dc3a3a, #ad367, #b4459a);
+  }
+</style>
+<section class="vh-100">
+  <div class="container py-5 h-75">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <h2 class="text-center cormorant">Welcome to VeggieVibe</h2>
+      <h4 class="text-center cormorant">Thanks for using our site!</h4>
+      <div class="col-md-8 col-lg-7 col-xl-6">
+        <img src="{% static '/recipes/images/general/onion_purple.jpg' %}"
+          class="img-fluid" alt="veggie vibe logo, a purple onion" style="border-radius:40%">
+      </div>
+      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+        <form method="POST">
+          {% csrf_token %}
+          <div class="form-outline mb-4">
+            <label class="form-label" for="id_username">Username</label>
+            <input type="text" name="username" autofocus autocapitalize="none" required aria-describedby="id_username_helptext" autocomplete="username" maxlength="150" required id="id_username" class="form-control form-control-lg"/>
+            <span class="helptext text-mutted" id="id_username_helptext">Special chars allowed: @ . + - _</span>
+          </div>
+          <!-- Email input -->
+          <div class="form-outline mb-4">
+            <label class="form-label" for="id_email">Email</label>
+            <input type="email" name="email" maxlength="254" required id="id_email" class="form-control form-control-lg" />
+          </div>
+          <!-- Password input -->
+          <div class="form-outline mb-4">
+            <label class="form-label" for="id_password">Password</label>
+            <input type="password" name="password" maxlength="128" required id="id_password" class="form-control form-control-lg" />
+          </div>
+          <!-- Submit button -->
+          <div class="d-flex justify-content-around align-items-center mb-4">
+            <button type="submit" class="btn btn-outline-success btn-lg btn-block">Sign up</button>
+            </div>
+            <div class="divider d-flex align-items-center my-4">
+              <p class="text-center fw-bold mx-3 mb-0 text-muted">Do you have an account already?</p>
+            </div>
+            <div class="d-flex justify-content-around align-items-center mb-4">
+              
+              <a href="{% url 'users:profile' %}" class="btn btn-info text-white gradient-custom-2 btn-lg btn-block">Log in</a>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+```
