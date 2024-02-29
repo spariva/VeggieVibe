@@ -1,10 +1,9 @@
-from django.shortcuts import render
+# from django.shortcuts import render
 from recipes.models import Recipe, Tag
 from django.views import generic
 
 # from django.db.models import Q, Count
 # from django.core.paginator import Paginator
-# from django.shortcuts import render
 
 
 class RecipeListView(generic.ListView):
@@ -33,15 +32,6 @@ class RecipeListView(generic.ListView):
         tags_selected = self.request.GET.getlist("tag", "")
         for tag in tags_selected:
             queryset = queryset.filter(tags__name=tag)
-            # Q y | para hacer la consulta:
-            # query = Q()
-            # for tag in tags_selected:
-            #     query |= Q(tags__name=tag)
-            # queryset = queryset.filter(query).annotate(matching_tags=Count('tags')).filter(matching_tags=len(tags_selected))
-            # queryset = queryset.filter(query)
-            # Consulta donde busca por inclusión de todos los tags seleccionados
-            # queryset = queryset.filter(tags__name__in=tags_selected)
-
         # I split by ',' ingredients into a list of strings and then filter the queryset I use strip so doesn´t matter the order, it doesn´t matter if there are spaces or not.
         ingredients_selected = self.request.GET.get("ingredients", "").split(",")
         for ingredient in ingredients_selected:
@@ -64,3 +54,28 @@ class RecipeDetailView(generic.DetailView):
             step for step in context["steps"] if step
         ]  # remove empty strings
         return context
+
+class RecipeCreateView(generic.CreateView):
+    model = Recipe
+    fields = ["title", "description", "ingredients", "steps", "tags", "image"]
+    template_name = "recipes/recipe_form.html"
+
+# This method sets the user attribute of the Recipe instance to the currently logged-in user.
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+    
+
+# class RecipeUpdateView(generic.UpdateView):
+#     model = Recipe
+#     fields = ["title", "description", "ingredients", "steps", "tags", "image"]
+#     template_name = "recipes/recipe_form.html"
+
+#     def form_valid(self, form):
+#         form.instance.user = self.request.user
+#         return super().form_valid(form)
+
+# class RecipeDeleteView(generic.DeleteView):
+#     model = Recipe
+#     success_url = "/"
+#     template_name = "recipes/recipe_confirm_delete.html"
