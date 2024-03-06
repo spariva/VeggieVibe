@@ -1,22 +1,50 @@
 {% extends "base.html" %}
 {% block content %}
-    {% if request.user.is_authenticated %}
-        <p>Hola {{ request.user.username }}!</p>
-            <form method="post" action="{% url 'logout' %}">
-                {% csrf_token %}
-                <button type="submit">Logout</button>
-            </form>
-    {% endif %}
-    {% if user.fav_recipes %}
-        <h2>Recetas favoritas</h2>
-        <ul>
-            {% for recipe in fav_recipes %}
-                <li><a href="{% url 'recipes:recipe_detail' %}">{{ recipe.name }}</a></li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Aún no tienes recetas favoritas =0</p>
-    {% endif %}
-{% include "recipes/create_recipe.html" %}
+<main class="">
+    <div class="container py-5 mt-0 pt-0">
+        <div class="row d-flex align-items-center justify-content-around">
+            <h2 class="cormorant">{{ request.user.username }}</h2>
+            <h4 class="text-end cormorant">Use your account to add new recipes, and save your favourite ones!</h4>
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                <img src="{{ profile.profile_picture.url }}" alt="profile picture" class="img-fluid w-50">
+                {% if profile.bio %}
+                    <p>{{ profile.bio }}</p>
+                {% else %}
+                    <p>Bio: ...</p>
+                    {% comment %} TODO Add a textarea, or to button que despliegue textarea. {% endcomment %}
+                {% endif %}
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                <div class="d-flex justify-content-around align-items-center mb-4">
+                    {% if user.fav_recipes %}
+                        <h2 class="cormorant">Favourite recipes</h2>
+                        <ul>
+                            {% for recipe in fav_recipes %}
+                                <li><a href="{% url 'recipes:recipe_detail' %}">{{ recipe.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <h2 class="cormorant">My favs:</h2>
+                        <p>You don't have any!</p>
+                    {% endif %}
+                </div>
+                <div class="d-flex justify-content-around align-items-center mb-4 p-2">
+                    {% if user.created_recipes %}
+                        <h2 class="cormorant">My recipes:</h2>
+                        <ul>
+                            {% for recipe in user.created_recipes.all %}
+                                <li><a href="{% url 'recipes:recipe_detail' recipe.id %}">{{ recipe.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="d-flex justify-content-around align-items-center mb-4">
+                    <h2 class="cormorant">Add new recipe:</h2>
+                    <a href="{% url 'recipes:create_recipe' %}" class="btn btn-outline-success btn-lg btn-block">New</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 {% endblock %}
 ```

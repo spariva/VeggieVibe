@@ -9,7 +9,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     # Campos adicionales que hay en profile y no en user
     bio = models.TextField(max_length=500, blank=True)
-    profile_picture = models.ImageField(upload_to='users/static/users/images/', blank=True)
+    profile_picture = models.ImageField(upload_to='users/static/users/images/', default='recipes/static/recipes/images/general/onion_sad.jfif', blank=True)
     
     def __str__(self):
         return f'{self.user.username} profile'
@@ -23,15 +23,6 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
-    
-#* from django.contrib.auth.models import AbstrUser
-
-# * class CustomUser(AbstractUser): 
-# # Extender el modelo de usuario de Django, no sobreescribirlo
-#     # Agregar campos personalizados si es necesario
-#     bio = models.TextField(blank=True)
-#     profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True)
-#     favourite_recipes = models.ManyToManyField('recipes.Recipe', related_name='favorited_by', blank=True)
 
     
 # ? Modelo de recetas favoritas del user

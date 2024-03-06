@@ -1,6 +1,6 @@
+{% extends "base.html" %}
 {% block content %}
     <h2 class="cormorant">Add new recipe</h2>
-    <a href="{% url 'recipes:create_recipe' %}">Let's go!</a>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}

@@ -8,7 +8,7 @@ class Recipe(models.Model):
     ingredients = models.TextField()
     steps = models.TextField()
     tags = models.ManyToManyField('Tag', related_name='recipes', blank=True)
-    image = models.ImageField(upload_to='recipes/static/recipes/images', blank=True)
+    image = models.ImageField(upload_to='recipes/static/recipes/images',default='recipes/static/recipes/images/general/onion_sad.jfif', blank=True)
     creator = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='created_recipes')
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -20,5 +20,3 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
-    
-# Arania web scrapy para obtener recetas, 

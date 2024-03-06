@@ -1,9 +1,5 @@
-# from django.shortcuts import render
 from recipes.models import Recipe, Tag
 from django.views import generic
-
-# from django.db.models import Q, Count
-# from django.core.paginator import Paginator
 
 
 class RecipeListView(generic.ListView):
@@ -87,3 +83,5 @@ class RecipeCreateView(generic.CreateView):
 #     model = Recipe
 #     success_url = "/"
 #     template_name = "recipes/recipe_confirm_delete.html"
+
+# TODO hacer el recipe y update, pero con un form personalizado, para que el usuario no pueda cambiar el creador de la receta (y en el detail salga botón de borrar o editar si la has creado tú), y para que el usuario no pueda cambiar la imagen de la receta, si no que la pueda borrar y subir otra.

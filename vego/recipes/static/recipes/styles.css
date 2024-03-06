@@ -27,9 +27,21 @@ h2 {
   font-style: italic;
   font-size: 3.4rem !important;
 }
+
 .card-hover:hover {
   box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
   transition: ease-in-out 0.4s;
   scale: 1.1;
+}
+
+.gradient-custom-2 {
+  /* fallback for old browsers */
+  background: #dc76a2;
+  
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, #dc76a2, #d8363a, #dd3675, #b44593);
+  
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(120deg, #e05db9, #d77bf5, #ae83dd, #75e4bf);
 }
 
