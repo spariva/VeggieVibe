@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    volumes:
+      - .:/code
+      - ./data/db.sqlite3:/code/db.sqlite3
+    ports:
+      - "8000:8000"
