@@ -12,3 +12,4 @@ class RecipeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Recipe
         fields = '__all__'
+        # lookup_field = 'id'
