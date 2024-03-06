@@ -39,10 +39,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django_extensions",  # nose
-    "allauth",  # añadimos estas 3 para el login
+    "django_extensions",  # para el shell_plus
+    "allauth",  # login
     "allauth.account",
     "allauth.socialaccount",
+    "rest_framework",  # para la api
+    # "coreapi",
 ]
 
 MIDDLEWARE = [
@@ -152,3 +154,12 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = "/profile"  # añadido para el login
 LOGOUT_REDIRECT_URL = "/"  # añadido para el logout
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    # 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+}

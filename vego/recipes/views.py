@@ -1,5 +1,8 @@
 from recipes.models import Recipe, Tag
 from django.views import generic
+from rest_framework import viewsets, permissions
+from .serializers import RecipeSerializer, UserSerializer
+from django.contrib.auth import get_user_model
 
 
 class RecipeListView(generic.ListView):
@@ -85,3 +88,11 @@ class RecipeCreateView(generic.CreateView):
 #     template_name = "recipes/recipe_confirm_delete.html"
 
 # TODO hacer el recipe y update, pero con un form personalizado, para que el usuario no pueda cambiar el creador de la receta (y en el detail salga botón de borrar o editar si la has creado tú), y para que el usuario no pueda cambiar la imagen de la receta, si no que la pueda borrar y subir otra.
+
+class RecipeViewSet(viewsets.ModelViewSet):
+    queryset = Recipe.objects.all()
+    serializer_class = RecipeSerializer
+    
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = get_user_model().objects.all()
+    serializer_class = UserSerializer
