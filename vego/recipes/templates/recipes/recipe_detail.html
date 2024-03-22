@@ -2,10 +2,16 @@
 {% block content %}
     <!-- detail of the recipes here, showing picture, description and steps: -->
     <div class="container">
+        <divv class="row">
+            <div class="col-md-12 m-2">
+                <h2 class="p-2">{{ recipe.title }}</h2>
+                <p>{{ recipe.description }}</p>
+            </div>
         <div class="row">
             <div class="col-md-6">
-                <h2>{{ recipe.title }}</h2>
-                <p>{{ recipe.description }}</p>
+                <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" class="img-fluid">
+            </div>
+            <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-5">
                         <h3>Tags:</h3>
@@ -23,20 +29,17 @@
                             {% endfor %}
                         </ul>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Steps:</h3>
+                            <ul>
+                                {% for step in steps %}
+                                    <li>{{ step }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" class="img-fluid">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <h3>Steps:</h3>
-                <ul>
-                    {% for step in steps %}
-                        <li>{{ step }}</li>
-                    {% endfor %}
-                </ul>
             </div>
         </div>
         <a href="{% url 'recipes:recipe_list' %}" class="btn btn-success">Back to recipes</a>
