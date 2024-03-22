@@ -6,29 +6,27 @@
             <div class="col-md-6">
                 <h2>{{ recipe.title }}</h2>
                 <p>{{ recipe.description }}</p>
+                <div class="row">
+                    <div class="col-md-5">
+                        <h3>Tags:</h3>
+                        <ul>
+                            {% for tag in tags %}
+                                <li>{{ tag }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="col-md-7">
+                        <h3>Ingredients:</h3>
+                        <ul>
+                            {% for ingredient in ingredients %}
+                                <li>{{ ingredient }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div class="col-md-6">
                 <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" class="img-fluid">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <h3>Tags:</h3>
-                <ul>
-                    {% for tag in tags %}
-                        <li>{{ tag }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <h3>Ingredients:</h3>
-                <ul>
-                    {% for ingredient in ingredients %}
-                        <li>{{ ingredient }}</li>
-                    {% endfor %}
-                </ul>
             </div>
         </div>
         <div class="row">
