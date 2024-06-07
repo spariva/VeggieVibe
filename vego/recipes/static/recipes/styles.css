@@ -30,7 +30,7 @@ h2 {
 
 .card-hover:hover {
   box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
-  transition: ease-in-out 0.4s;
+  transition: ease-in-out 0.5s;
   scale: 1.1;
 }
 
